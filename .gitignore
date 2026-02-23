@@ -1,0 +1,70 @@
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# ==============================
+# IDE / Editor
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==============================
+# OS junk
+# ==============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Logs
+# ==============================
+logs/
+*.log
+
+# ==============================
+# Robot / Dataset Outputs
+# ==============================
+datasets/
+outputs/
+checkpoints/
+runs/
+videos/
+recordings/
+
+# Flor artifacts (if you store them locally)
+flor_runs/
+flor_cache/
+
+# ==============================
+# HuggingFace / model artifacts
+# ==============================
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.safetensors
+
+# ==============================
+# Temporary data
+# ==============================
+*.tmp
+*.cache
+.cache/
