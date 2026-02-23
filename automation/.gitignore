@@ -1,0 +1,63 @@
+# ----------------------
+# Python
+# ----------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ----------------------
+# IDE / OS
+# ----------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# Large datasets
+# ----------------------
+datasets/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# ----------------------
+# Model weights
+# ----------------------
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+
+# ----------------------
+# Logs
+# ----------------------
+*.log
+*.out
+*.err
+
+# ----------------------
+# FlorDB artifacts (if local DB files appear)
+# ----------------------
+flor.db
+flor_data/
+
+# ----------------------
+# HuggingFace cache
+# ----------------------
+.huggingface/
+.cache/
+
+# ----------------------
+# Windows temp
+# ----------------------
+*.tmp
+*.bak
