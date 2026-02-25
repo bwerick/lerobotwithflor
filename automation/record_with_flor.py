@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+import flordb as flor
 
 
 def _utc_now_iso() -> str:
@@ -24,8 +25,7 @@ def _try_import_flor():
     If not installed, we still run the recording and save a manifest.
     """
     try:
-        import flor  # type: ignore
-        return flor
+        import flordb as flor  # type: ignore
     except Exception as e:
         return None
 
@@ -132,11 +132,11 @@ def main():
     parser.add_argument("--repo_id", default="BarbaricErick/so101_3cam_demo")
     parser.add_argument("--num_episodes", type=int, default=10)
     parser.add_argument("--episode_time_s", type=int, default=180)  # up to 3 minutes
-    parser.add_argument("--reset_time_s", type=int, default=20)     # 20 seconds reset
+    parser.add_argument("--reset_time_s", type=int, default=8)     # 20 seconds reset
     parser.add_argument("--push_to_hub", action="store_true", default=False)
     parser.add_argument(
         "--task",
-        default="Pick up the red cylinder and place it centered on the white base. Then place the metal stand upright on top of the cylinder.",
+        default="Pick up the red cylinder and place it centered on the white base.",
     )
     parser.add_argument(
         "--datasets_dir",
@@ -180,7 +180,7 @@ def main():
         print(" ".join(shlex.quote(x) for x in cmd))
         return
 
-    flor = _try_import_flor()
+    #flor = _try_import_flor()
 
     # Basic run metadata (also saved to manifest)
     manifest = {
