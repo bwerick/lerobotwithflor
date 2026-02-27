@@ -33,7 +33,7 @@ import sys
 import time
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, Iterable, Optional, Tuple
-import pynvml
+import threading
 import flordb as flor
 
 from typing import Optional, Dict, Any
@@ -416,10 +416,37 @@ def run_train(cfg: TrainRunConfig) -> int:
     # Start time (stable columns)
     t_start = time.time()
     flor.log("train/run_start_ts", t_start)
+    m = try_get_gpu_metrics()
+    if m:
+        for k, v in m.items():
+            flor.log(k, v)
+        # optional: also print for console
+        print(m)
+    else:
+        print("GPU metrics unavailable (pynvml not working).")
 
     # -------------------------
     # Start process
     # -------------------------
+    stop_evt = threading.Event()
+
+    def _poll_gpu(stop_evt: threading.Event, every_s: float = 5.0):
+        while not stop_evt.is_set():
+            m = try_get_gpu_metrics()
+            if m:
+                for k, v in m.items():
+                    flor.log(k, v)
+            stop_evt.wait(every_s)
+
+    t = threading.Thread(
+        target=_poll_gpu,
+        args=(stop_evt, 5.0),   # poll every 5 seconds
+        daemon=True,
+    )
+    t.start()
+
+
+
     p = subprocess.Popen(
         cmd,
         stdout=subprocess.PIPE,
@@ -500,6 +527,10 @@ def run_train(cfg: TrainRunConfig) -> int:
 
         rc = p.wait()
 
+        #stop polling
+        stop_evt.set()
+        t.join(timeout=1.0)
+
     except KeyboardInterrupt:
         print("\nInterrupted. Terminating training process...")
         try:
@@ -512,6 +543,10 @@ def run_train(cfg: TrainRunConfig) -> int:
         flor.log("train/run_end_ts", t_end)
         flor.log("train/run_duration_s", float(t_end - t_start))
         flor.log("train/return_code", int(rc))
+        m = try_get_gpu_metrics()
+        if m:
+            for k, v in m.items():
+                flor.log(f"gpu_end/{k.split('/',1)[1] if '/' in k else k}", v)
         shutdown_nvml()
 
     return int(rc)
