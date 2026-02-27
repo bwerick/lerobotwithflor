@@ -425,20 +425,6 @@ def run_train(cfg: TrainRunConfig) -> int:
     # -------------------------
     # Start process
     # -------------------------
-    gpu_loop = flor.loop("gpu")   # name can be "gpu" or whatever you want
-    stop_evt = threading.Event()
-
-    def _poll_gpu():
-        while not stop_evt.is_set():
-            m = try_get_gpu_metrics()
-            if m:
-                row = {"t": time.time()}     # optional timestamp column
-                row.update(m)                # gpu/util_pct, gpu/temp_c, etc.
-                gpu_loop.log(row)            # <-- key part: log a ROW to the loop
-            stop_evt.wait(5.0)
-
-    t = threading.Thread(target=_poll_gpu, daemon=True)
-    t.start()
 
 
 
@@ -541,8 +527,6 @@ def run_train(cfg: TrainRunConfig) -> int:
         if m:
             for k, v in m.items():
                 flor.log(f"gpu_end/{k.split('/',1)[1] if '/' in k else k}", v)
-        stop_evt.set()
-        t.join(timeout=1.0)
         shutdown_nvml()
 
     return int(rc)
