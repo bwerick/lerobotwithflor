@@ -1,182 +1,146 @@
 [
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "run_name",
-    "value": "so101_3cam_20260225_134040",
+    "name": "cfg/policy_type",
+    "value": "smolvla",
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "dataset_root",
-    "value": "C:\\Users\\Erick Duarte\\git\\lerobotwithflor\\datasets\\so101_3cam_20260225_134040",
+    "name": "cfg/dataset_repo_id",
+    "value": "BarbaricErick/so101_3cam_merged",
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "robot_port",
-    "value": "COM6",
+    "name": "cfg/output_dir",
+    "value": "outputs/smoke_smolvla",
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "teleop_port",
-    "value": "COM5",
+    "name": "cfg/log_every",
+    "value": 5,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "repo_id",
-    "value": "BarbaricErick/so101_3cam_demo",
+    "name": "cfg/sys_every",
+    "value": 5,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "num_episodes",
-    "value": 10,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "episode_time_s",
-    "value": 180,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "reset_time_s",
-    "value": 8,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "push_to_hub",
-    "value": false,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "task",
-    "value": "Pick up the red cylinder and place it centered on the white base.",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "event",
-    "value": "recording_start",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "started_utc",
-    "value": "2026-02-25T20:40:40Z",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "event",
-    "value": "recording_end",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "finished_utc",
-    "value": "2026-02-25T20:48:52Z",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "return_code",
+    "name": "cfg/stdout_every",
     "value": 0,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "elapsed_s",
-    "value": 492.4615879058838,
+    "name": "cfg/run_tag",
+    "value": "",
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "success",
-    "value": true,
+    "name": "cfg/seed",
+    "value": 0,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
-    "name": "output_contains_timeout",
+    "name": "cfg/extra",
+    "value": "--trainer.max_steps 200 --train.batch_size 4 --dataloader.num_workers 0",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/os",
+    "value": "Windows-10-10.0.26200-SP0",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/machine",
+    "value": "AMD64",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/python",
+    "value": "3.10.4",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/executable",
+    "value": "C:\\Users\\Erick Duarte\\git\\lerobotwithflor\\.venv\\Scripts\\python.exe",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/torch_version",
+    "value": "2.7.1+cpu",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/cuda_available",
     "value": false,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
-    "ctx": null,
-    "name": "output_contains_read_failed",
-    "value": false,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-02-25T13:40:39",
-    "filename": "record_with_flor.py",
+    "tstamp": "2026-02-27T14:53:54",
+    "filename": "train_with_flor.py",
     "ctx": null,
     "name": "delta::suffix",
-    "value": 493.0882553000001,
+    "value": 4.639199199999894,
     "type": 3
   }
 ]
