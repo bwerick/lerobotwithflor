@@ -245,12 +245,32 @@ class TrainRunConfig:
     extra: Optional[str] = None        # extra CLI args string
 
 
-def flor_log_args(prefix: str, d: Dict[str, Any]) -> None:
+
+
+_SAFE_ARG_RE = re.compile(r"[^A-Za-z0-9_]+")
+
+def _safe_arg_name(name: str) -> str:
+    # turn "cfg/batch_size" into "cfg_batch_size"
+    name = name.strip()
+    name = _SAFE_ARG_RE.sub("_", name)
+    name = re.sub(r"_+", "_", name)
+    return name.strip("_")
+
+def flor_log_config_as_args(cfg_dict: dict) -> None:
     """
-    Log many key/value pairs as flor.arg(). Keeps names stable.
+    For hyperparams/config only.
+    Uses flor.arg with SAFE names so Flor's CLI kwargs/replay doesn't choke.
     """
-    for k, v in d.items():
-        flor.arg(f"{prefix}{k}", v)
+    for k, v in cfg_dict.items():
+        flor.arg(_safe_arg_name(k), v)
+
+def flor_log_metadata_as_logs(meta_dict: dict) -> None:
+    """
+    For system/git/observed metadata. These are not "kwargs".
+    Use flor.log (more permissive and semantically correct).
+    """
+    for k, v in meta_dict.items():
+        flor.log(k, v)
 
 
 # ----------------------------
@@ -287,8 +307,24 @@ def run_train(cfg: TrainRunConfig) -> int:
     # -------------------------
     # Run-level Flor logging
     # -------------------------
-    flor_log_args("cfg/", asdict(cfg))
-    flor_log_args("", get_static_sys_info())
+    
+
+    _SAFE = re.compile(r"[^A-Za-z0-9_]+")
+
+    def safe_arg_key(k: str) -> str:
+        k = _SAFE.sub("_", k)
+        k = re.sub(r"_+", "_", k)
+        return k.strip("_")
+
+    # log config/hparams as args (safe for Flor)
+    for k, v in asdict(cfg).items():
+        flor.arg(safe_arg_key(f"cfg_{k}"), v)
+    # config / hyperparams as args (safe)
+    flor_log_config_as_args({f"cfg_{k}": v for k, v in asdict(cfg).items()})
+
+    # system + git metadata as logs (stable columns)
+    for k, v in get_static_sys_info().items():
+        flor.log(k, v)   # sys/os, git/commit, etc. are stable COLUMNS
 
     cmd = build_lerobot_train_cmd(cfg)
     flor.arg("train/cmd", " ".join(shlex.quote(x) for x in cmd))
