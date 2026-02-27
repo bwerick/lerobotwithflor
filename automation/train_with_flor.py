@@ -33,8 +33,10 @@ import sys
 import time
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, Iterable, Optional, Tuple
-
+import pynvml
 import flordb as flor
+
+from typing import Optional, Dict, Any
 
 # Optional deps
 try:
@@ -56,6 +58,85 @@ except Exception:
 # ----------------------------
 # Helpers: git / system info
 # ----------------------------
+
+# ---- gpu_metrics.py-ish (module-level) ----
+
+
+_NVML_READY = False
+_NVML_HANDLE = None
+
+def init_nvml(device_index: int = 0) -> None:
+    global _NVML_READY, _NVML_HANDLE
+    if _NVML_READY:
+        return
+    try:
+        import pynvml
+        pynvml.nvmlInit()
+        _NVML_HANDLE = pynvml.nvmlDeviceGetHandleByIndex(device_index)
+        _NVML_READY = True
+    except Exception:
+        _NVML_READY = False
+        _NVML_HANDLE = None
+
+def shutdown_nvml() -> None:
+    global _NVML_READY, _NVML_HANDLE
+    if not _NVML_READY:
+        return
+    try:
+        import pynvml
+        pynvml.nvmlShutdown()
+    except Exception:
+        pass
+    _NVML_READY = False
+    _NVML_HANDLE = None
+
+def try_get_gpu_metrics() -> Dict[str, Any]:
+    """
+    Returns dict with GPU metrics or {} if unavailable.
+    Requires `nvidia-ml-py` (imports as `pynvml`).
+    """
+    if not _NVML_READY or _NVML_HANDLE is None:
+        return {}
+
+    try:
+        import pynvml
+        h = _NVML_HANDLE
+
+        name = pynvml.nvmlDeviceGetName(h)
+        if isinstance(name, bytes):
+            name = name.decode("utf-8", errors="ignore")
+
+        mem = pynvml.nvmlDeviceGetMemoryInfo(h)          # bytes
+        util = pynvml.nvmlDeviceGetUtilizationRates(h)   # %
+        temp = pynvml.nvmlDeviceGetTemperature(h, pynvml.NVML_TEMPERATURE_GPU)
+
+        out = {
+            "gpu/name": name,
+            "gpu/util_pct": int(util.gpu),
+            "gpu/mem_util_pct": int(util.memory),
+            "gpu/mem_used_mb": round(mem.used / (1024**2), 1),
+            "gpu/mem_total_mb": round(mem.total / (1024**2), 1),
+            "gpu/mem_free_mb": round(mem.free / (1024**2), 1),
+            "gpu/temp_c": int(temp),
+        }
+
+        # optional: power (not always supported)
+        try:
+            mw = pynvml.nvmlDeviceGetPowerUsage(h)  # milliwatts
+            out["gpu/power_w"] = round(mw / 1000.0, 1)
+        except Exception:
+            pass
+
+        # optional: clocks
+        try:
+            out["gpu/sm_clock_mhz"] = int(pynvml.nvmlDeviceGetClockInfo(h, pynvml.NVML_CLOCK_SM))
+            out["gpu/mem_clock_mhz"] = int(pynvml.nvmlDeviceGetClockInfo(h, pynvml.NVML_CLOCK_MEM))
+        except Exception:
+            pass
+
+        return out
+    except Exception:
+        return {}
 
 def _run_cmd(cmd: list[str]) -> Optional[str]:
     try:
@@ -326,6 +407,7 @@ def run_train(cfg: TrainRunConfig) -> int:
     for k, v in get_static_sys_info().items():
         flor.log(k, v)   # sys/os, git/commit, etc. are stable COLUMNS
 
+
     cmd = build_lerobot_train_cmd(cfg)
     flor.arg("train/cmd", " ".join(shlex.quote(x) for x in cmd))
 
@@ -363,7 +445,8 @@ def run_train(cfg: TrainRunConfig) -> int:
 
     # For step timing
     last_step_ts = time.time()
-
+    init_nvml(device_index=0)
+    print(try_get_gpu_metrics())
     try:
         for raw_line in p.stdout:
             line = raw_line.rstrip("\n")
@@ -429,6 +512,7 @@ def run_train(cfg: TrainRunConfig) -> int:
         flor.log("train/run_end_ts", t_end)
         flor.log("train/run_duration_s", float(t_end - t_start))
         flor.log("train/return_code", int(rc))
+        shutdown_nvml()
 
     return int(rc)
 
