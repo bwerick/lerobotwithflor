@@ -29,7 +29,7 @@ SMEXTRA ?= --steps 50 --batch_size 2 --num_workers 0 --log_freq 1 --save_freq 99
 TIMESTAMP := $(shell date +%Y%m%d_%H%M%S)
 SMOUT := $(SMBASE_OUT)_$(TIMESTAMP)
 
-.PHONY: help venv clone-lerobot install-lerobot install setup testtrain train record clean distclean
+.PHONY: help venv clone-lerobot install-reqs install-lerobot install setup testtrain train record clean distclean
 
 help:
 	@echo "Targets:"
@@ -42,7 +42,8 @@ help:
 
 venv:
 	@test -d $(VENV) || $(PY) -m venv $(VENV)
-	@$(PIP) install -U pip setuptools wheel
+	@$(PIP) install -U pip wheel
+	@$(PIP) install "setuptools>=71,<81"
 
 clone-lerobot:
 	@if [ ! -d "$(LEROBOT_DIR)" ]; then \
@@ -52,6 +53,10 @@ clone-lerobot:
 		echo "Found lerobot at $(LEROBOT_DIR)"; \
 	fi
 
+install-reqs: venv
+	@echo "Installing project requirements..."
+	@$(PIP) install -r requirements.txt
+
 install-lerobot: venv clone-lerobot
 	@# base install
 	@$(PIP) install -e $(LEROBOT_DIR)
@@ -59,7 +64,7 @@ install-lerobot: venv clone-lerobot
 	@$(PIP) install -e "$(LEROBOT_DIR)[feetech]"
 	@$(PIP) install -e "$(LEROBOT_DIR)[smolvla]"
 
-install: install-lerobot
+install: install-lerobot install-reqs
 
 setup: install
 	@mkdir -p outputs
@@ -74,7 +79,7 @@ testtrain: venv
 		--output_dir $(SMOUT) \
 		--log_every $(SMLOG_EVERY) \
 		--sys_every $(SMSYS_EVERY) \
-		--extra "$(EXTRA)"
+		--extra "$(SMEXTRA)"
 
 train: venv
 	@$(PYBIN) automation/train_with_flor.py \
