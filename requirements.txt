@@ -1,0 +1,7 @@
+flordb
+pandas
+numpy
+nvidia-ml-py
+huggingface_hub
+transformers
+datasets

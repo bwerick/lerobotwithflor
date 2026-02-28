@@ -68,3 +68,4 @@ flor_cache/
 *.tmp
 *.cache
 .cache/
+*.ipynb
