@@ -1,0 +1,44 @@
+{
+  "tool": "lerobot-record",
+  "started_utc": "2026-02-23T20:35:17Z",
+  "run_name": "so101_3cam_20260223_133517",
+  "dataset_root": "C:\\Users\\Erick Duarte\\git\\lerobotwithflor\\datasets\\so101_3cam_20260223_133517",
+  "host": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.4 (tags/v3.10.4:9d38120, Mar 23 2022, 23:13:41) [MSC v.1929 64 bit (AMD64)]",
+    "cwd": "C:\\Users\\Erick Duarte\\git\\lerobotwithflor"
+  },
+  "config": {
+    "robot_port": "COM6",
+    "teleop_port": "COM5",
+    "repo_id": "BarbaricErick/so101_3cam_demo",
+    "num_episodes": 10,
+    "episode_time_s": 180,
+    "reset_time_s": 20,
+    "push_to_hub": false,
+    "task": "Pick up the red cylinder and place it centered on the white base. Then place the metal stand upright on top of the cylinder."
+  },
+  "command": [
+    "lerobot-record",
+    "--robot.type=so101_follower",
+    "--robot.port=COM6",
+    "--robot.id=follower",
+    "--robot.cameras={\"front\":{\"type\":\"opencv\",\"index_or_path\":0,\"width\":640,\"height\":480,\"fps\":20,\"fourcc\":\"MJPG\"},\"overhead\":{\"type\":\"opencv\",\"index_or_path\":1,\"width\":640,\"height\":480,\"fps\":20,\"fourcc\":\"MJPG\"},\"wrist\":{\"type\":\"opencv\",\"index_or_path\":2,\"width\":480,\"height\":640,\"fps\":10,\"fourcc\":\"MJPG\",\"rotation\":90,\"warmup_s\":2}}",
+    "--teleop.type=so101_leader",
+    "--teleop.port=COM5",
+    "--teleop.id=leader",
+    "--display_data=true",
+    "--display_compressed_images=true",
+    "--dataset.root=C:\\Users\\Erick Duarte\\git\\lerobotwithflor\\datasets\\so101_3cam_20260223_133517",
+    "--dataset.repo_id=BarbaricErick/so101_3cam_demo",
+    "--dataset.num_episodes=10",
+    "--dataset.episode_time_s=180",
+    "--dataset.reset_time_s=20",
+    "--dataset.push_to_hub=false",
+    "--dataset.single_task=Pick up the red cylinder and place it centered on the white base. Then place the metal stand upright on top of the cylinder."
+  ],
+  "finished_utc": "2026-02-23T20:36:06Z",
+  "return_code": 1,
+  "elapsed_s": 49.09862565994263,
+  "console_tail": "INFO 2026-02-23 13:35:26 t_record.py:404 {'dataset': {'episode_time_s': 180,\n             'fps': 30,\n             'num_episodes': 10,\n             'num_image_writer_processes': 0,\n             'num_image_writer_threads_per_camera': 4,\n             'private': False,\n             'push_to_hub': False,\n             'rename_map': {},\n             'repo_id': 'BarbaricErick/so101_3cam_demo',\n             'reset_time_s': 20,\n             'root': 'C:\\\\Users\\\\Erick '\n                     'Duarte\\\\git\\\\lerobotwithflor\\\\datasets\\\\so101_3cam_20260223_133517',\n             'single_task': 'Pick up the red cylinder and place it centered on '\n                            'the white base. Then place the metal stand '\n                            'upright on top of the cylinder.',\n             'tags': None,\n             'vcodec': 'libsvtav1',\n             'video': True,\n             'video_encoding_batch_size': 1},\n 'display_compressed_images': True,\n 'display_data': True,\n 'display_ip': None,\n 'display_port': None,\n 'play_sounds': True,\n 'policy': None,\n 'resume': False,\n 'robot': {'calibration_dir': None,\n           'cameras': {'front': {'color_mode': <ColorMode.RGB: 'rgb'>,\n                                 'fourcc': 'MJPG',\n                                 'fps': 20,\n                                 'height': 480,\n                                 'index_or_path': 0,\n                                 'rotation': <Cv2Rotation.NO_ROTATION: 0>,\n                                 'warmup_s': 1,\n                                 'width': 640},\n                       'overhead': {'color_mode': <ColorMode.RGB: 'rgb'>,\n                                    'fourcc': 'MJPG',\n                                    'fps': 20,\n                                    'height': 480,\n                                    'index_or_path': 1,\n                                    'rotation': <Cv2Rotation.NO_ROTATION: 0>,\n                                    'warmup_s': 1,\n                                    'width': 640},\n                       'wrist': {'color_mode': <ColorMode.RGB: 'rgb'>,\n                                 'fourcc': 'MJPG',\n                                 'fps': 10,\n                                 'height': 640,\n                                 'index_or_path': 2,\n                                 'rotation': <Cv2Rotation.ROTATE_90: 90>,\n                                 'warmup_s': 2,\n                                 'width': 480}},\n           'disable_torque_on_disconnect': True,\n           'id': 'follower',\n           'max_relative_target': None,\n           'port': 'COM6',\n           'use_degrees': False},\n 'teleop': {'calibration_dir': None,\n            'id': 'leader',\n            'port': 'COM5',\n            'use_degrees': False}}\n[2026-02-23T20:35:27Z INFO  re_grpc_server] Listening for gRPC connections on 0.0.0.0:9876. Connect by running `rerun --connect rerun+http://127.0.0.1:9876/proxy`\n[2026-02-23T20:35:28Z INFO  egui_wgpu] There were 2 available wgpu adapters: {backend: Vulkan, device_type: DiscreteGpu, name: \"NVIDIA GeForce RTX 3070\", driver: \"NVIDIA\", driver_info: \"591.74\", vendor: NVIDIA (0x10DE), device: 0x2488}, {backend: Gl, device_type: Other, name: \"NVIDIA GeForce RTX 3070/PCIe/SSE2\", driver_info: \"4.6.0 NVIDIA 591.74\", vendor: NVIDIA (0x10DE)}\nTraceback (most recent call last):\n  File \"C:\\Python310\\lib\\runpy.py\", line 196, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"C:\\Python310\\lib\\runpy.py\", line 86, in _run_code\n    exec(code, run_globals)\n  File \"C:\\Users\\Erick Duarte\\git\\lerobotwithflor\\.venv\\Scripts\\lerobot-record.exe\\__main__.py\", line 5, in <module>\n  File \"C:\\Users\\Erick Duarte\\git\\lerobot\\src\\lerobot\\scripts\\lerobot_record.py\", line 566, in main\n    record()\n  File \"C:\\Users\\Erick Duarte\\git\\lerobot\\src\\lerobot\\configs\\parser.py\", line 233, in wrapper_inner\n    response = fn(cfg, *args, **kwargs)\n  File \"C:\\Users\\Erick Duarte\\git\\lerobot\\src\\lerobot\\scripts\\lerobot_record.py\", line 413, in record\n    robot = make_robot_from_config(cfg.robot)\n  File \"C:\\Users\\Erick Duarte\\git\\lerobot\\src\\lerobot\\robots\\utils.py\", line 38, in make_robot_from_config\n    return SO100Follower(config)\n  File \"C:\\Users\\Erick Duarte\\git\\lerobot\\src\\lerobot\\robots\\so_follower\\so_follower.py\", line 52, in __init__\n    self.bus = FeetechMotorsBus(\n  File \"C:\\Users\\Erick Duarte\\git\\lerobot\\src\\lerobot\\motors\\feetech\\feetech.py\", line 126, in __init__\n    import scservo_sdk as scs\nModuleNotFoundError: No module named 'scservo_sdk'"
+}

@@ -1,0 +1,416 @@
+[
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_policy_type",
+    "value": "smolvla",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_dataset_repo_id",
+    "value": "BarbaricErick/so101_3cam_merged",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_output_dir",
+    "value": "outputs/smoke_smolvla_run7",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_log_every",
+    "value": 5,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_sys_every",
+    "value": 5,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_stdout_every",
+    "value": 0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_run_tag",
+    "value": "",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_seed",
+    "value": 0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_extra",
+    "value": "--steps 50 --batch_size 2 --num_workers 0 --log_freq 1 --save_freq 999999 --policy.push_to_hub false",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_policy_type",
+    "value": "smolvla",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_dataset_repo_id",
+    "value": "BarbaricErick/so101_3cam_merged",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_output_dir",
+    "value": "outputs/smoke_smolvla_run7",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_log_every",
+    "value": 5,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_sys_every",
+    "value": 5,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_stdout_every",
+    "value": 0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_run_tag",
+    "value": "",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_seed",
+    "value": 0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "cfg_extra",
+    "value": "--steps 50 --batch_size 2 --num_workers 0 --log_freq 1 --save_freq 999999 --policy.push_to_hub false",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/os",
+    "value": "Windows-10-10.0.26200-SP0",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/machine",
+    "value": "AMD64",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/python",
+    "value": "3.10.4",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/executable",
+    "value": "C:\\Users\\Erick Duarte\\git\\lerobotwithflor\\.venv\\Scripts\\python.exe",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/torch_version",
+    "value": "2.6.0+cu124",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/cuda_available",
+    "value": true,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/cuda_version",
+    "value": "12.4",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/gpu_name",
+    "value": "NVIDIA GeForce RTX 3070",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "git/commit",
+    "value": "cc402f694323f89e7cb1c9606b2fd857be63d17b",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "git/dirty",
+    "value": true,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/psutil_available",
+    "value": true,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "sys/pynvml_available",
+    "value": true,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "train/cmd",
+    "value": "lerobot-train --policy.type smolvla --dataset.repo_id BarbaricErick/so101_3cam_merged --output_dir outputs/smoke_smolvla_run7 --steps 50 --batch_size 2 --num_workers 0 --log_freq 1 --save_freq 999999 --policy.push_to_hub false",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "train/run_start_ts",
+    "value": 1772235532.4271238,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "train/run_end_ts",
+    "value": 1772235609.7608774,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "train/run_duration_s",
+    "value": 77.33375358581543,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "train/return_code",
+    "value": 0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/name",
+    "value": "NVIDIA GeForce RTX 3070",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/util_pct",
+    "value": 9,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/mem_util_pct",
+    "value": 4,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/mem_used_mb",
+    "value": 1215.9,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/mem_total_mb",
+    "value": 8192.0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/mem_free_mb",
+    "value": 6976.1,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/temp_c",
+    "value": 44,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/power_w",
+    "value": 21.3,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/sm_clock_mhz",
+    "value": 210,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "gpu_end/mem_clock_mhz",
+    "value": 810,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-02-27T16:38:49",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "delta::suffix",
+    "value": 79.81479249999938,
+    "type": 3
+  }
+]
