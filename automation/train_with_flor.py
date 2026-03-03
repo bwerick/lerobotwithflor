@@ -50,8 +50,6 @@ except Exception:
     torch = None
 
 
-
-
 # ----------------------------
 # Helpers: git / system info
 # ----------------------------
@@ -62,12 +60,14 @@ except Exception:
 _NVML_READY = False
 _NVML_HANDLE = None
 
+
 def init_nvml(device_index: int = 0) -> None:
     global _NVML_READY, _NVML_HANDLE
     if _NVML_READY:
         return
     try:
         import pynvml
+
         pynvml.nvmlInit()
         _NVML_HANDLE = pynvml.nvmlDeviceGetHandleByIndex(device_index)
         _NVML_READY = True
@@ -75,17 +75,20 @@ def init_nvml(device_index: int = 0) -> None:
         _NVML_READY = False
         _NVML_HANDLE = None
 
+
 def shutdown_nvml() -> None:
     global _NVML_READY, _NVML_HANDLE
     if not _NVML_READY:
         return
     try:
         import pynvml
+
         pynvml.nvmlShutdown()
     except Exception:
         pass
     _NVML_READY = False
     _NVML_HANDLE = None
+
 
 def try_get_gpu_metrics() -> Dict[str, Any]:
     """
@@ -97,14 +100,15 @@ def try_get_gpu_metrics() -> Dict[str, Any]:
 
     try:
         import pynvml
+
         h = _NVML_HANDLE
 
         name = pynvml.nvmlDeviceGetName(h)
         if isinstance(name, bytes):
             name = name.decode("utf-8", errors="ignore")
 
-        mem = pynvml.nvmlDeviceGetMemoryInfo(h)          # bytes
-        util = pynvml.nvmlDeviceGetUtilizationRates(h)   # %
+        mem = pynvml.nvmlDeviceGetMemoryInfo(h)  # bytes
+        util = pynvml.nvmlDeviceGetUtilizationRates(h)  # %
         temp = pynvml.nvmlDeviceGetTemperature(h, pynvml.NVML_TEMPERATURE_GPU)
 
         out = {
@@ -126,14 +130,19 @@ def try_get_gpu_metrics() -> Dict[str, Any]:
 
         # optional: clocks
         try:
-            out["gpu/sm_clock_mhz"] = int(pynvml.nvmlDeviceGetClockInfo(h, pynvml.NVML_CLOCK_SM))
-            out["gpu/mem_clock_mhz"] = int(pynvml.nvmlDeviceGetClockInfo(h, pynvml.NVML_CLOCK_MEM))
+            out["gpu/sm_clock_mhz"] = int(
+                pynvml.nvmlDeviceGetClockInfo(h, pynvml.NVML_CLOCK_SM)
+            )
+            out["gpu/mem_clock_mhz"] = int(
+                pynvml.nvmlDeviceGetClockInfo(h, pynvml.NVML_CLOCK_MEM)
+            )
         except Exception:
             pass
 
         return out
     except Exception:
         return {}
+
 
 def _run_cmd(cmd: list[str]) -> Optional[str]:
     try:
@@ -206,7 +215,7 @@ def get_dynamic_sys_metrics() -> Dict[str, Any]:
             m["sys/cpu_pct"] = None
         try:
             vm = psutil.virtual_memory()
-            m["sys/ram_used_gb"] = float((vm.total - vm.available) / (1024 ** 3))
+            m["sys/ram_used_gb"] = float((vm.total - vm.available) / (1024**3))
             m["sys/ram_pct"] = float(vm.percent)
         except Exception:
             m["sys/ram_used_gb"] = None
@@ -229,8 +238,8 @@ def get_dynamic_sys_metrics() -> Dict[str, Any]:
         try:
             free_b, total_b = torch.cuda.mem_get_info()
             used_b = total_b - free_b
-            m["sys/gpu_mem_used_gb"] = float(used_b / (1024 ** 3))
-            m["sys/gpu_mem_total_gb"] = float(total_b / (1024 ** 3))
+            m["sys/gpu_mem_used_gb"] = float(used_b / (1024**3))
+            m["sys/gpu_mem_total_gb"] = float(total_b / (1024**3))
         except Exception:
             m["sys/gpu_mem_used_gb"] = None
             m["sys/gpu_mem_total_gb"] = None
@@ -267,10 +276,14 @@ _METRIC_PATTERNS = [
     re.compile(r"\b(step|global_step)\s*=\s*(\d+)\b", re.IGNORECASE),
     re.compile(r"\b(epoch)\s*=\s*(\d+)\b", re.IGNORECASE),
     re.compile(r"\b(loss)\s*=\s*([0-9]*\.?[0-9]+(?:[eE][-+]?\d+)?)\b"),
-    re.compile(r"\b(lr|learning_rate)\s*=\s*([0-9]*\.?[0-9]+(?:[eE][-+]?\d+)?)\b", re.IGNORECASE),
-
+    re.compile(
+        r"\b(lr|learning_rate)\s*=\s*([0-9]*\.?[0-9]+(?:[eE][-+]?\d+)?)\b",
+        re.IGNORECASE,
+    ),
     # JSON-ish metrics: "metric/loss": 0.123, etc.
-    re.compile(r'"metric/(step|epoch|loss|lr)"\s*:\s*("?)([0-9]*\.?[0-9]+)\2', re.IGNORECASE),
+    re.compile(
+        r'"metric/(step|epoch|loss|lr)"\s*:\s*("?)([0-9]*\.?[0-9]+)\2', re.IGNORECASE
+    ),
 ]
 
 
@@ -306,26 +319,26 @@ def parse_metrics_from_line(line: str) -> Dict[str, Any]:
 # Config model
 # ----------------------------
 
+
 @dataclass
 class TrainRunConfig:
     # What to train
     policy_type: str = "smolvla"
-    dataset_repo_id: str = ""          # e.g. "BarbaricErick/my_merged_dataset"
+    dataset_repo_id: str = ""  # e.g. "BarbaricErick/my_merged_dataset"
     output_dir: str = "outputs/train"  # where checkpoints/logs go
     # Logging cadence
-    log_every: int = 50                # log train metrics every N steps
-    sys_every: int = 50                # log sys metrics every M steps (often same as log_every)
-    stdout_every: int = 0              # 0 disables; otherwise log every K lines
+    log_every: int = 50  # log train metrics every N steps
+    sys_every: int = 50  # log sys metrics every M steps (often same as log_every)
+    stdout_every: int = 0  # 0 disables; otherwise log every K lines
     # Optional tags
     run_tag: str = ""
     seed: int = 0
     # Pass-through extra args for lerobot-train
-    extra: Optional[str] = None        # extra CLI args string
-
-
+    extra: Optional[str] = None  # extra CLI args string
 
 
 _SAFE_ARG_RE = re.compile(r"[^A-Za-z0-9_]+")
+
 
 def _safe_arg_name(name: str) -> str:
     # turn "cfg/batch_size" into "cfg_batch_size"
@@ -334,6 +347,7 @@ def _safe_arg_name(name: str) -> str:
     name = re.sub(r"_+", "_", name)
     return name.strip("_")
 
+
 def flor_log_config_as_args(cfg_dict: dict) -> None:
     """
     For hyperparams/config only.
@@ -341,6 +355,7 @@ def flor_log_config_as_args(cfg_dict: dict) -> None:
     """
     for k, v in cfg_dict.items():
         flor.arg(_safe_arg_name(k), v)
+
 
 def flor_log_metadata_as_logs(meta_dict: dict) -> None:
     """
@@ -355,18 +370,24 @@ def flor_log_metadata_as_logs(meta_dict: dict) -> None:
 # Main training runner
 # ----------------------------
 
+
 def build_lerobot_train_cmd(cfg: TrainRunConfig) -> list[str]:
     """
     Builds a lerobot training command. Adjust flags to match your actual CLI usage.
     """
     if not cfg.dataset_repo_id:
-        raise ValueError("dataset_repo_id is required (HF repo id for LeRobot dataset).")
+        raise ValueError(
+            "dataset_repo_id is required (HF repo id for LeRobot dataset)."
+        )
 
     cmd = [
         "lerobot-train",
-        "--policy.type", cfg.policy_type,
-        "--dataset.repo_id", cfg.dataset_repo_id,
-        "--output_dir", cfg.output_dir,
+        "--policy.type",
+        cfg.policy_type,
+        "--dataset.repo_id",
+        cfg.dataset_repo_id,
+        "--output_dir",
+        cfg.output_dir,
     ]
 
     # Optional: seed
@@ -385,7 +406,6 @@ def run_train(cfg: TrainRunConfig) -> int:
     # -------------------------
     # Run-level Flor logging
     # -------------------------
-    
 
     _SAFE = re.compile(r"[^A-Za-z0-9_]+")
 
@@ -402,8 +422,7 @@ def run_train(cfg: TrainRunConfig) -> int:
 
     # system + git metadata as logs (stable columns)
     for k, v in get_static_sys_info().items():
-        flor.log(k, v)   # sys/os, git/commit, etc. are stable COLUMNS
-
+        flor.log(k, v)  # sys/os, git/commit, etc. are stable COLUMNS
 
     cmd = build_lerobot_train_cmd(cfg)
     flor.arg("train/cmd", " ".join(shlex.quote(x) for x in cmd))
@@ -425,8 +444,6 @@ def run_train(cfg: TrainRunConfig) -> int:
     # -------------------------
     # Start process
     # -------------------------
-
-
 
     p = subprocess.Popen(
         cmd,
@@ -485,7 +502,9 @@ def run_train(cfg: TrainRunConfig) -> int:
                 continue
 
             # Log train metrics every cfg.log_every steps.
-            if (observed_step % cfg.log_every == 0) and (observed_step != last_logged_step):
+            if (observed_step % cfg.log_every == 0) and (
+                observed_step != last_logged_step
+            ):
                 now = time.time()
                 step_dt = now - last_step_ts
                 last_step_ts = now
@@ -508,8 +527,7 @@ def run_train(cfg: TrainRunConfig) -> int:
 
         rc = p.wait()
 
-        #stop polling
-        
+        # stop polling
 
     except KeyboardInterrupt:
         print("\nInterrupted. Terminating training process...")
@@ -534,15 +552,41 @@ def run_train(cfg: TrainRunConfig) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--policy_type", default="smolvla", help="LeRobot policy type (default: smolvla)")
-    ap.add_argument("--dataset_repo_id", required=True, help="HF dataset repo id, e.g. BarbaricErick/my_dataset")
+    ap.add_argument(
+        "--policy_type",
+        default="smolvla",
+        help="LeRobot policy type (default: smolvla)",
+    )
+    ap.add_argument(
+        "--dataset_repo_id",
+        required=True,
+        help="HF dataset repo id, e.g. BarbaricErick/my_dataset",
+    )
     ap.add_argument("--output_dir", default="outputs/train", help="Training output dir")
-    ap.add_argument("--log_every", type=int, default=50, help="Log training metrics every N steps")
-    ap.add_argument("--sys_every", type=int, default=50, help="Log system metrics every M steps")
-    ap.add_argument("--stdout_every", type=int, default=0, help="Log stdout every K lines (0 disables)")
+    ap.add_argument(
+        "--log_every", type=int, default=50, help="Log training metrics every N steps"
+    )
+    ap.add_argument(
+        "--sys_every", type=int, default=50, help="Log system metrics every M steps"
+    )
+    ap.add_argument(
+        "--stdout_every",
+        type=int,
+        default=0,
+        help="Log stdout every K lines (0 disables)",
+    )
     ap.add_argument("--run_tag", default="", help="Optional run tag")
-    ap.add_argument("--seed", type=int, default=0, help="Random seed (if supported by your training)")
-    ap.add_argument("--extra", default=None, help="Extra args passed through to lerobot-train (quoted string)")
+    ap.add_argument(
+        "--seed",
+        type=int,
+        default=0,
+        help="Random seed (if supported by your training)",
+    )
+    ap.add_argument(
+        "--extra",
+        default=None,
+        help="Extra args passed through to lerobot-train (quoted string)",
+    )
 
     args = ap.parse_args()
 
