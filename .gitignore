@@ -69,3 +69,4 @@ flor_cache/
 *.cache
 .cache/
 *.ipynb
+.ipynb_checkpoints/
