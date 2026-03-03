@@ -42,9 +42,8 @@ except Exception:
 
 # ----------------------------
 # Helpers: git / system info
+# TODO: Makes sense to put these in a shared utils module if we have multiple scripts.
 # ----------------------------
-
-# ---- gpu_metrics.py-ish (module-level) ----
 
 
 _NVML_READY = False
@@ -297,7 +296,7 @@ class TrainRunConfig:
     # What to train
     policy_type: str = "smolvla"
     dataset_repo_id: str = ""  # e.g. "BarbaricErick/my_merged_dataset"
-    output_dir: str = "outputs/train"  # where checkpoints/logs go
+    output_dir: str = "outputs/train"
     # Logging cadence
     log_every: int = 50  # log train metrics every N steps
     sys_every: int = 50  # log sys metrics every M steps (often same as log_every)
@@ -415,7 +414,6 @@ def run_train(cfg: TrainRunConfig) -> int:
 
             # Optional stdout logging WITHOUT schema explosion
             if cfg.stdout_every and (line_count % cfg.stdout_every == 0):
-                flor.loop("stdout_line", line_count)
                 flor.log("train/stdout_line", line)
 
             # Parse metrics
@@ -443,8 +441,6 @@ def run_train(cfg: TrainRunConfig) -> int:
                 step_dt = now - last_step_ts
                 last_step_ts = now
                 last_logged_step = observed_step
-
-                flor.loop("step", observed_step)
 
                 # Training metrics (stable column names)
                 flor.log("train/step", observed_step)
