@@ -3,21 +3,12 @@
 automation/train_with_flor.py
 
 Fine-tune (or train) a LeRobot policy (default: SmolVLA) while logging:
-- run config / hyperparams (once) via flor.log(...)
-- training metrics (every N steps) via flor.loop("step", step) + flor.log(...)
-- system metrics (every M steps) via flor.loop("step", step) + flor.log(...)
-- optional stdout lines (stable column names; no per-line columns)
-
-Key FlorDB rule:
-  flor.log(<NAME>, <VALUE>)  -> <NAME> becomes a COLUMN in the pivoted view.
-So <NAME> must be STABLE (e.g., "train/loss"), NOT "train/stdout_line/000123".
-Repetition is represented using flor.loop(...).
+- run config / hyperparams (once)
+- training and system metrics
 
 Cross-platform:
 - psutil is optional but recommended for CPU/RAM metrics
 - NVIDIA GPU util% is optional (pynvml). CUDA mem stats via torch if available.
-
-Run inside a Git repo (Flor expects that).
 """
 
 from __future__ import annotations
@@ -143,23 +134,6 @@ def try_get_gpu_metrics() -> Dict[str, Any]:
         return {}
 
 
-def _run_cmd(cmd: list[str]) -> Optional[str]:
-    try:
-        out = subprocess.check_output(cmd, stderr=subprocess.DEVNULL)
-        return out.decode("utf-8", errors="replace").strip()
-    except Exception:
-        return None
-
-
-def get_git_info() -> Dict[str, Any]:
-    commit = _run_cmd(["git", "rev-parse", "HEAD"])
-    dirty = _run_cmd(["git", "status", "--porcelain"])
-    return {
-        "git/commit": commit,
-        "git/dirty": None if dirty is None else (len(dirty) > 0),
-    }
-
-
 def get_static_sys_info() -> Dict[str, Any]:
     info: Dict[str, Any] = {
         "sys/os": platform.platform(),
@@ -193,7 +167,6 @@ def get_static_sys_info() -> Dict[str, Any]:
         info["sys/cuda_version"] = None
         info["sys/gpu_name"] = None
 
-    info.update(get_git_info())
     info["sys/psutil_available"] = psutil is not None
     info["sys/pynvml_available"] = pynvml is not None
     return info
