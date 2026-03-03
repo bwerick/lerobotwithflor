@@ -3,7 +3,7 @@
 automation/train_with_flor.py
 
 Fine-tune (or train) a LeRobot policy (default: SmolVLA) while logging:
-- run config / hyperparams (once) via flor.arg(...)
+- run config / hyperparams (once) via flor.log(...)
 - training metrics (every N steps) via flor.loop("step", step) + flor.log(...)
 - system metrics (every M steps) via flor.loop("step", step) + flor.log(...)
 - optional stdout lines (stable column names; no per-line columns)
@@ -36,7 +36,6 @@ from typing import Any, Dict, Iterable, Optional, Tuple
 import threading
 import flordb as flor
 import pynvml
-from typing import Optional, Dict, Any
 
 # Optional deps
 try:
@@ -337,35 +336,6 @@ class TrainRunConfig:
     extra: Optional[str] = None  # extra CLI args string
 
 
-_SAFE_ARG_RE = re.compile(r"[^A-Za-z0-9_]+")
-
-
-def _safe_arg_name(name: str) -> str:
-    # turn "cfg/batch_size" into "cfg_batch_size"
-    name = name.strip()
-    name = _SAFE_ARG_RE.sub("_", name)
-    name = re.sub(r"_+", "_", name)
-    return name.strip("_")
-
-
-def flor_log_config_as_args(cfg_dict: dict) -> None:
-    """
-    For hyperparams/config only.
-    Uses flor.arg with SAFE names so Flor's CLI kwargs/replay doesn't choke.
-    """
-    for k, v in cfg_dict.items():
-        flor.arg(_safe_arg_name(k), v)
-
-
-def flor_log_metadata_as_logs(meta_dict: dict) -> None:
-    """
-    For system/git/observed metadata. These are not "kwargs".
-    Use flor.log (more permissive and semantically correct).
-    """
-    for k, v in meta_dict.items():
-        flor.log(k, v)
-
-
 # ----------------------------
 # Main training runner
 # ----------------------------
@@ -407,25 +377,16 @@ def run_train(cfg: TrainRunConfig) -> int:
     # Run-level Flor logging
     # -------------------------
 
-    _SAFE = re.compile(r"[^A-Za-z0-9_]+")
-
-    def safe_arg_key(k: str) -> str:
-        k = _SAFE.sub("_", k)
-        k = re.sub(r"_+", "_", k)
-        return k.strip("_")
-
-    # log config/hparams as args (safe for Flor)
+    # log config/hparams as stable columns
     for k, v in asdict(cfg).items():
-        flor.arg(safe_arg_key(f"cfg_{k}"), v)
-    # config / hyperparams as args (safe)
-    flor_log_config_as_args({f"cfg_{k}": v for k, v in asdict(cfg).items()})
+        flor.log(f"cfg/{k}", v)
 
     # system + git metadata as logs (stable columns)
     for k, v in get_static_sys_info().items():
         flor.log(k, v)  # sys/os, git/commit, etc. are stable COLUMNS
 
     cmd = build_lerobot_train_cmd(cfg)
-    flor.arg("train/cmd", " ".join(shlex.quote(x) for x in cmd))
+    flor.log("train/cmd", " ".join(shlex.quote(x) for x in cmd))
 
     print("Running:", " ".join(shlex.quote(x) for x in cmd))
 
