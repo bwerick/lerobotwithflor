@@ -379,97 +379,8 @@ def run_train(cfg: TrainRunConfig) -> int:
         bufsize=1,
         universal_newlines=True,
     )
-
+    p.wait()  # wait for process to complete
     assert p.stdout is not None
-
-    # We log repeatedly under a step loop.
-    # If the training output includes an explicit step, use it.
-    # Otherwise, maintain our own "observed_step" counter (based on metric sightings).
-    observed_step: int = 0
-    last_logged_step: int = -1
-
-    # For stdout logging (optional)
-    line_count = 0
-
-    # Track last seen metrics (so we can log at cadence even if a line is missing some keys)
-    last_metrics: Dict[str, Any] = {}
-
-    # For step timing
-    last_step_ts = time.time()
-    init_nvml(device_index=0)
-    print(try_get_gpu_metrics())
-    try:
-        for raw_line in p.stdout:
-            line = raw_line.rstrip("\n")
-            print(line)
-
-            line_count += 1
-
-            # Optional stdout logging WITHOUT schema explosion
-            if cfg.stdout_every and (line_count % cfg.stdout_every == 0):
-                flor.log("train/stdout_line", line)
-
-            # Parse metrics
-            m = parse_metrics_from_line(line)
-            if m:
-                last_metrics.update(m)
-
-            # Determine step
-            if "train/step" in last_metrics:
-                observed_step = int(last_metrics["train/step"])
-            else:
-                # If no explicit step appears in logs, do nothing here.
-                # You can choose to increment per line or per batch if you have a hook.
-                pass
-
-            # Only log on valid steps
-            if observed_step <= 0:
-                continue
-
-            # Log train metrics every cfg.log_every steps.
-            if (observed_step % cfg.log_every == 0) and (
-                observed_step != last_logged_step
-            ):
-                now = time.time()
-                step_dt = now - last_step_ts
-                last_step_ts = now
-                last_logged_step = observed_step
-
-                # Training metrics (stable column names)
-                flor.log("train/step", observed_step)
-                flor.log("train/epoch", last_metrics.get("train/epoch", None))
-                flor.log("train/loss", last_metrics.get("train/loss", None))
-                flor.log("train/lr", last_metrics.get("train/lr", None))
-                flor.log("train/step_time_s", float(step_dt))
-
-                # System metrics (stable column names)
-                if cfg.sys_every and (observed_step % cfg.sys_every == 0):
-                    sysm = get_dynamic_sys_metrics()
-                    for k, v in sysm.items():
-                        flor.log(k, v)
-
-        rc = p.wait()
-
-        # stop polling
-
-    except KeyboardInterrupt:
-        print("\nInterrupted. Terminating training process...")
-        try:
-            p.terminate()
-        except Exception:
-            pass
-        rc = p.wait()
-    finally:
-        t_end = time.time()
-        flor.log("train/run_end_ts", t_end)
-        flor.log("train/return_code", int(rc))
-        m = try_get_gpu_metrics()
-        if m:
-            for k, v in m.items():
-                flor.log(f"gpu_end/{k.split('/',1)[1] if '/' in k else k}", v)
-        shutdown_nvml()
-
-    return int(rc)
 
 
 def main() -> int:
@@ -513,15 +424,15 @@ def main() -> int:
     args = ap.parse_args()
 
     cfg = TrainRunConfig(
-        policy_type=args.policy_type,
-        dataset_repo_id=args.dataset_repo_id,
+        policy_type=flor.arg("policy_type", args.policy_type),
+        dataset_repo_id=flor.arg("dataset_repo_id", args.dataset_repo_id),
         output_dir=args.output_dir,
         log_every=args.log_every,
         sys_every=args.sys_every,
         stdout_every=args.stdout_every,
-        run_tag=args.run_tag,
-        seed=args.seed,
-        extra=args.extra,
+        run_tag=flor.arg("run_tag", args.run_tag),
+        seed=flor.arg("seed", args.seed),
+        extra=flor.arg("extra", args.extra),
     )
 
     return run_train(cfg)
