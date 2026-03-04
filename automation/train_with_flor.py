@@ -462,7 +462,6 @@ def run_train(cfg: TrainRunConfig) -> int:
     finally:
         t_end = time.time()
         flor.log("train/run_end_ts", t_end)
-        flor.log("train/run_duration_s", float(t_end - t_start))
         flor.log("train/return_code", int(rc))
         m = try_get_gpu_metrics()
         if m:
