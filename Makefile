@@ -14,7 +14,7 @@ DATASET ?= BarbaricErick/so101_3c_merged
 BASE_OUT ?= outputs/smolvla_make
 LOG_EVERY ?= 70
 SYS_EVERY ?= 70
-EXTRA ?= --steps 40000 --batch_size 128 --num_workers 8 --log_freq 10 --save_freq 5000 --policy.push_to_hub false
+EXTRA ?= --steps 40000 --batch_size 32 --num_workers 8 --log_freq 10 --save_freq 5000 --policy.push_to_hub false
 # generate timestamp at execution time
 TIMESTAMP := $(shell date +%Y%m%d_%H%M%S)
 OUT := $(BASE_OUT)_$(TIMESTAMP)
@@ -24,7 +24,7 @@ SMDATASET ?= BarbaricErick/so101_3c_merged
 SMBASE_OUT ?= outputs/test_smolvla_make
 SMLOG_EVERY ?= 5
 SMSYS_EVERY ?= 5
-SMEXTRA ?= --steps 50 --batch_size 2 --num_workers 0 --log_freq 1 --save_freq 999999 --policy.push_to_hub false
+SMEXTRA ?= --steps 128 --batch_size 16 --num_workers 1 --log_freq 1 --save_freq 999999 --policy.push_to_hub false
 # generate timestamp at execution time
 TIMESTAMP := $(shell date +%Y%m%d_%H%M%S)
 SMOUT := $(SMBASE_OUT)_$(TIMESTAMP)

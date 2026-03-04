@@ -371,16 +371,9 @@ def run_train(cfg: TrainRunConfig) -> int:
     # Start process
     # -------------------------
 
-    p = subprocess.Popen(
-        cmd,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        bufsize=1,
-        universal_newlines=True,
-    )
-    p.wait()  # wait for process to complete
-    assert p.stdout is not None
+    p = subprocess.Popen(cmd)
+    # run the process
+    p.wait()
 
 
 def main() -> int:

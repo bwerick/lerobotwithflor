@@ -1,7 +1,52 @@
 [
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "policy_type",
+    "value": "smolvla",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-03-04T13:52:56",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "dataset_repo_id",
+    "value": "BarbaricErick/so101_3c_merged",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-03-04T13:52:56",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "run_tag",
+    "value": "",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-03-04T13:52:56",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "seed",
+    "value": 0,
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-03-04T13:52:56",
+    "filename": "train_with_flor.py",
+    "ctx": null,
+    "name": "extra",
+    "value": "--steps 128 --batch_size 16 --num_workers 1 --log_freq 1 --save_freq 999999 --policy.push_to_hub false",
+    "type": 1
+  },
+  {
+    "projid": "lerobotwithflor",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/os",
@@ -10,7 +55,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/machine",
@@ -19,7 +64,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/python",
@@ -28,7 +73,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/executable",
@@ -37,7 +82,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/torch_version",
@@ -46,7 +91,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/cuda_available",
@@ -55,7 +100,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/cuda_version",
@@ -64,7 +109,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/gpu_name",
@@ -73,7 +118,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/psutil_available",
@@ -82,7 +127,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "sys/pynvml_available",
@@ -91,16 +136,16 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "train/cmd",
-    "value": "lerobot-train --policy.type smolvla --dataset.repo_id BarbaricErick/so101_3c_merged --output_dir outputs/test_smolvla_make_20260304_112427 --steps 50 --batch_size 2 --num_workers 0 --log_freq 1 --save_freq 999999 --policy.push_to_hub false",
+    "value": "lerobot-train --policy.type smolvla --dataset.repo_id BarbaricErick/so101_3c_merged --output_dir outputs/test_smolvla_make_20260304_135255 --steps 128 --batch_size 16 --num_workers 1 --log_freq 1 --save_freq 999999 --policy.push_to_hub false",
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/name",
@@ -109,7 +154,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/util_pct",
@@ -118,7 +163,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/mem_util_pct",
@@ -127,7 +172,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/mem_used_mb",
@@ -136,7 +181,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/mem_total_mb",
@@ -145,7 +190,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/mem_free_mb",
@@ -154,25 +199,25 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/temp_c",
-    "value": 37,
+    "value": 39,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/power_w",
-    "value": 11.1,
+    "value": 12.0,
     "type": 1
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/sm_clock_mhz",
@@ -181,7 +226,7 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "gpu/mem_clock_mhz",
@@ -190,209 +235,11 @@
   },
   {
     "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/name",
-    "value": "NVIDIA GeForce RTX 4090",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/util_pct",
-    "value": 0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_util_pct",
-    "value": 0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_used_mb",
-    "value": 515.9,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_total_mb",
-    "value": 24564.0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_free_mb",
-    "value": 24048.1,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/temp_c",
-    "value": 37,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/power_w",
-    "value": 11.1,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/sm_clock_mhz",
-    "value": 210,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_clock_mhz",
-    "value": 405,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "train/run_end_ts",
-    "value": 1772645099.891893,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "train/return_code",
-    "value": 0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/name",
-    "value": "NVIDIA GeForce RTX 4090",
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/util_pct",
-    "value": 0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_util_pct",
-    "value": 0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_used_mb",
-    "value": 515.9,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_total_mb",
-    "value": 24564.0,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_free_mb",
-    "value": 24048.1,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/temp_c",
-    "value": 40,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/power_w",
-    "value": 55.3,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/sm_clock_mhz",
-    "value": 2520,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
-    "filename": "train_with_flor.py",
-    "ctx": null,
-    "name": "gpu/mem_clock_mhz",
-    "value": 10251,
-    "type": 1
-  },
-  {
-    "projid": "lerobotwithflor",
-    "tstamp": "2026-03-04T11:24:28",
+    "tstamp": "2026-03-04T13:52:56",
     "filename": "train_with_flor.py",
     "ctx": null,
     "name": "delta::suffix",
-    "value": 30.978900807999707,
+    "value": 73.01429986800031,
     "type": 3
   }
 ]
