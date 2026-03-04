@@ -137,6 +137,7 @@ def try_get_gpu_metrics() -> None:
 
 
 def log_static_sys_info() -> None:
+    # flor.dataframe("sys/%")
     info: Dict[str, Any] = {
         "sys/os": platform.platform(),
         "sys/machine": platform.machine(),
