@@ -26,9 +26,13 @@ from dataclasses import asdict, dataclass
 from typing import Any, Dict, Iterable, Optional, Tuple
 import threading
 import flordb as flor
-import pynvml
 
 # Optional deps
+try:
+    import pynvml  # type: ignore
+except Exception:
+    pynvml = None
+
 try:
     import psutil  # type: ignore
 except Exception:
@@ -79,17 +83,14 @@ def shutdown_nvml() -> None:
     _NVML_HANDLE = None
 
 
-def try_get_gpu_metrics() -> Dict[str, Any]:
+def try_get_gpu_metrics() -> None:
     """
-    Returns dict with GPU metrics or {} if unavailable.
     Requires `nvidia-ml-py` (imports as `pynvml`).
     """
     if not _NVML_READY or _NVML_HANDLE is None:
-        return {}
+        return
 
     try:
-        import pynvml
-
         h = _NVML_HANDLE
 
         name = pynvml.nvmlDeviceGetName(h)
@@ -128,18 +129,22 @@ def try_get_gpu_metrics() -> Dict[str, Any]:
         except Exception:
             pass
 
-        return out
+        for k, v in out.items():
+            flor.log(k, v)
+
     except Exception:
-        return {}
+        pass
 
 
-def get_static_sys_info() -> Dict[str, Any]:
+def log_static_sys_info() -> None:
     info: Dict[str, Any] = {
         "sys/os": platform.platform(),
         "sys/machine": platform.machine(),
         "sys/python": platform.python_version(),
         "sys/executable": sys.executable,
     }
+
+    # if torch is not defined or
 
     if torch is not None:
         info["sys/torch_version"] = getattr(torch, "__version__", None)
@@ -168,7 +173,9 @@ def get_static_sys_info() -> Dict[str, Any]:
 
     info["sys/psutil_available"] = psutil is not None
     info["sys/pynvml_available"] = pynvml is not None
-    return info
+
+    for k, v in info.items():
+        flor.log(k, v)
 
 
 def get_dynamic_sys_metrics() -> Dict[str, Any]:
@@ -349,30 +356,15 @@ def run_train(cfg: TrainRunConfig) -> int:
     # Run-level Flor logging
     # -------------------------
 
-    # log config/hparams as stable columns
-    for k, v in asdict(cfg).items():
-        flor.log(f"cfg/{k}", v)
-
-    # system + git metadata as logs (stable columns)
-    for k, v in get_static_sys_info().items():
-        flor.log(k, v)  # sys/os, git/commit, etc. are stable COLUMNS
+    # system metadata as logs
+    log_static_sys_info()
 
     cmd = build_lerobot_train_cmd(cfg)
     flor.log("train/cmd", " ".join(shlex.quote(x) for x in cmd))
 
-    print("Running:", " ".join(shlex.quote(x) for x in cmd))
-
-    # Start time (stable columns)
-    t_start = time.time()
-    flor.log("train/run_start_ts", t_start)
-    m = try_get_gpu_metrics()
-    if m:
-        for k, v in m.items():
-            flor.log(k, v)
-        # optional: also print for console
-        print(m)
-    else:
-        print("GPU metrics unavailable (pynvml not working).")
+    # try to log gpu metrics
+    init_nvml(device_index=0)
+    try_get_gpu_metrics()
 
     # -------------------------
     # Start process
