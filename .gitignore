@@ -70,3 +70,4 @@ flor_cache/
 .cache/
 *.ipynb
 .ipynb_checkpoints/
+smolvla_50k_summary.png
