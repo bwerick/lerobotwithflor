@@ -3,7 +3,7 @@
 Extended LeRobot training utilities with [FlorDB](https://github.com/ucbrise/flor) logging support.
 
 <!-- Insert img/camera_arm.jpg, so it fits nicely in README width -->
-<img src="img/camera_arm.jpg" alt="Camera Arm" style="width:100%; max-width:300px;">
+<img src="img/camera_arm.jpg" alt="Camera Arm" style="width:30%">
 
 This repo wraps HuggingFace LeRobot training, recording, and teleoperation with structured logging via FlorDB.
 
