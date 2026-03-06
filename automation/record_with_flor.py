@@ -127,8 +127,8 @@ def build_lerobot_record_command(
 
 def main():
     parser = argparse.ArgumentParser(description="Run lerobot-record with FlorDB logging + manifest output.")
-    parser.add_argument("--robot_port", default="COM6")
-    parser.add_argument("--teleop_port", default="COM5")
+    parser.add_argument("--robot_port", default="/dev/ttyACM1")
+    parser.add_argument("--teleop_port", default="/dev/ttyACM0")
     parser.add_argument("--repo_id", default="BarbaricErick/so101_3cam_demo")
     parser.add_argument("--num_episodes", type=int, default=10)
     parser.add_argument("--episode_time_s", type=int, default=180)  # up to 3 minutes
